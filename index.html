@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>اشتريلي | عبر الخليج</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="التنقل الرئيسي">
+        <div class="brand-lockup">
+          <img src="assets/abr-logo.svg" alt="شعار شركة عبر الخليج للتجارة" class="brand-logo" />
+          <div>
+            <p class="brand-kicker">شركة عبر الخليج للتجارة</p>
+            <h1>اشتريلي</h1>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="today" type="button">
+            <i data-lucide="layout-dashboard"></i>
+            <span>اليوم</span>
+          </button>
+          <button class="nav-item" data-view="requests" type="button">
+            <i data-lucide="clipboard-list"></i>
+            <span>طلبات الشراء</span>
+          </button>
+          <button class="nav-item" data-view="parts" type="button">
+            <i data-lucide="cog"></i>
+            <span>قطع الغيار</span>
+          </button>
+          <button class="nav-item" data-view="suppliers" type="button">
+            <i data-lucide="handshake"></i>
+            <span>الموردين</span>
+          </button>
+          <button class="nav-item" data-view="warehouse" type="button">
+            <i data-lucide="warehouse"></i>
+            <span>المستودعات</span>
+          </button>
+          <button class="nav-item" data-view="assignments" type="button">
+            <i data-lucide="users-round"></i>
+            <span>التكليفات</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span>فكرة وتطوير</span>
+          <strong>عمرو هاشم</strong>
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="topbar-title">
+            <span class="live-dot"></span>
+            <div>
+              <p>غرفة تحكم المشتريات الذكية</p>
+              <h2 id="viewTitle">اليوم</h2>
+            </div>
+          </div>
+
+          <div class="top-actions">
+            <label class="global-search">
+              <i data-lucide="search"></i>
+              <input id="globalSearch" type="search" placeholder="ابحث عن طلب، قطعة، معدة أو مورد" />
+            </label>
+            <button id="openNewRequest" class="primary-action" type="button">
+              <i data-lucide="plus"></i>
+              <span>طلب جديد</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="assistant-strip" aria-label="مساعد اشتريلي">
+          <div class="assistant-avatar">AI</div>
+          <div class="assistant-copy">
+            <strong>مساعد اشتريلي</strong>
+            <span id="assistantHint">قولّي محتاج إيه وأنا أرتب الطلب، المورد، المخزون، والتكليف.</span>
+          </div>
+          <form id="commandForm" class="command-form">
+            <label class="icon-button" style="cursor: pointer;" title="إرفاق صورة للبحث المطابق">
+              <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
+              <i data-lucide="camera"></i>
+            </label>
+            <input id="commandInput" type="text" placeholder="مثال: عايز فلتر ديزل للبوكلين ومحتاج أعرف موجود فين" />
+            <button type="submit" aria-label="إرسال للمساعد">
+              <i data-lucide="send"></i>
+            </button>
+          </form>
+        </section>
+
+        <div id="appContent" class="content-grid"></div>
+      </main>
+
+      <aside class="assistant-panel" aria-label="المحادثة الذكية">
+        <div class="panel-head">
+          <div>
+            <p>المساعد المصري</p>
+            <h3>متابع الشغل معاك</h3>
+          </div>
+          <button id="clearChat" class="icon-button" type="button" aria-label="مسح المحادثة">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+
+        <div id="chatLog" class="chat-log"></div>
+
+        <div class="quick-prompts">
+          <button data-prompt="رتبلي أولويات النهار" type="button">أولويات النهار</button>
+          <button data-prompt="طلبات السوق المحلي" type="button">السوق المحلي 🇸🇦</button>
+          <button data-prompt="طلبات الصين" type="button">استيراد الصين 🇨🇳</button>
+          <button data-prompt="مين الموردين والقطع اللي في البلاك ليست؟" type="button">البلاك ليست 🚫</button>
+        </div>
+      </aside>
+    </div>
+
+    <div id="requestModal" class="modal-backdrop" aria-hidden="true">
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle">
+        <div class="modal-head">
+          <div>
+            <p>إنشاء طلب بالمحادثة</p>
+            <h3 id="requestModalTitle">طلب شراء ذكي</h3>
+          </div>
+          <button id="closeModal" class="icon-button" type="button" aria-label="إغلاق">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <div class="request-wizard">
+          <label class="smart-textarea">
+            <span>اكتب الطلب بطريقتك</span>
+            <textarea
+              id="requestText"
+              rows="5"
+              placeholder="مثال: محتاج طرمبة هيدروليك عاجلة للبوكلين كوماتسو EQ-214 في مشروع الرياض، المعدة واقفة"
+            ></textarea>
+          </label>
+
+          <div class="wizard-actions">
+            <button id="analyzeRequest" class="secondary-action" type="button">
+              <i data-lucide="sparkles"></i>
+              <span>حلل الطلب</span>
+            </button>
+            <button id="createRequest" class="primary-action" type="button" disabled>
+              <i data-lucide="check"></i>
+              <span>اعتمد كطلب جديد</span>
+            </button>
+          </div>
+
+          <div id="analysisResult" class="analysis-result">
+            <span>المساعد هيطلع لك التصنيف، القطعة، المعدة، الأولوية، والمورد المقترح.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

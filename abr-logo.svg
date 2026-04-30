@@ -1,0 +1,10 @@
+<svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">ABR Alkhalij smart procurement logo</title>
+  <desc id="desc">Stylized gold and navy mark inspired by Abr Alkhalij company identity.</desc>
+  <rect width="240" height="160" rx="14" fill="#FFFFFF"/>
+  <path d="M48 119L100 35C106 25 121 25 127 35L178 119" stroke="#E4AA16" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M103 119L128 78L153 119" stroke="#E4AA16" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M150 35C156 25 171 25 177 35L220 119" stroke="#201C2E" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M126 84C116 98 112 107 112 116C112 127 120 135 130 135C140 135 148 127 148 116C148 107 142 96 126 84Z" fill="#FFFFFF"/>
+  <text x="118" y="149" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#201C2E">ABR ALKHALIJ</text>
+</svg>
